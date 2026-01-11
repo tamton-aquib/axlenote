@@ -1,0 +1,71 @@
+@import "tailwindcss";
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=JetBrains+Mono:wght@400;500&display=swap');
+@import "tailwindcss";
+
+@theme {
+    --font-sans: 'Outfit', system-ui, sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+
+    /* Custom Color Palette - Deep Space/Vibrant */
+    --color-background: #09090b;
+    /* Zinc 950 base */
+    --color-surface: #18181b;
+    /* Zinc 900 */
+    --color-surface-highlight: #27272a;
+    /* Zinc 800 */
+
+    --color-primary: #8b5cf6;
+    /* Violet 500 */
+    --color-primary-dark: #7c3aed;
+    /* Violet 600 */
+    --color-primary-glow: rgba(139, 92, 246, 0.5);
+
+    --color-accent: #10b981;
+    /* Emerald 500 */
+}
+
+/* Custom Scrollbar for Webkit */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #27272a;
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #3f3f46;
+}
+
+body {
+    background-color: var(--color-background);
+    color: #fafafa;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+input,
+select,
+textarea,
+button {
+    font-family: inherit;
+}
+
+/* Global Input Reset/Style */
+input[type="text"],
+input[type="number"],
+input[type="email"],
+input[type="password"],
+input[type="date"],
+input[type="datetime-local"],
+select,
+textarea {
+    @apply bg-zinc-900 border border-zinc-800 rounded-lg px-3 py-2 text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-violet-500/50 focus:border-violet-500/50 transition-all duration-200;
+}

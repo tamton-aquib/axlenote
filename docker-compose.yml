@@ -1,0 +1,51 @@
+services:
+  axlenote:
+    build: .
+    container_name: axlenote-app
+    ports:
+      - "1247:80"
+    environment:
+      DB_HOST: postgres
+      DB_PORT: "5432"
+      DB_USER: axleuser
+      DB_PASSWORD: axlepass
+      DB_NAME: axlenote
+      TZ: Asia/Kolkata
+      NOTIFY_PROVIDER: none
+      NOTIFY_BASE_URL: https://ntfy.sh
+      NOTIFY_TOPIC: axlenote
+      NOTIFY_ENABLED: "false"
+      METRICS_UNIT: km
+      APP_CURRENCY: "₹"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - axlenote-network
+
+  postgres:
+    image: postgres:15-alpine
+    container_name: axlenote-db
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: axleuser
+      POSTGRES_PASSWORD: axlepass
+      POSTGRES_DB: axlenote
+      TZ: Asia/Kolkata
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U axleuser -d axlenote"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    networks:
+      - axlenote-network
+
+networks:
+  axlenote-network:
+    driver: bridge
+
+volumes:
+  postgres_data:
