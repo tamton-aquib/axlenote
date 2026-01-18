@@ -56,12 +56,12 @@ export default function AddDocumentModal({ isOpen, onClose, onSuccess, vehicleId
         <Modal isOpen={isOpen} onClose={onClose} title="Add Document">
             <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
-                    <label className="block text-sm font-medium text-zinc-400 mb-1">Document Name</label>
+                    <label className="block text-sm font-medium text-neutral-500 dark:text-zinc-400 mb-1">Document Name</label>
                     <input
                         type="text"
                         required
                         placeholder="e.g. Vehicle Registration"
-                        className="w-full rounded-xl bg-zinc-950 border border-white/5 px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-violet-500/50"
+                        className="w-full rounded-xl bg-neutral-50 dark:bg-zinc-950 border border-neutral-200 dark:border-white/5 px-4 py-2 text-neutral-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-violet-500/50"
                         value={formData.name}
                         onChange={e => setFormData({ ...formData, name: e.target.value })}
                     />
@@ -69,9 +69,9 @@ export default function AddDocumentModal({ isOpen, onClose, onSuccess, vehicleId
 
                 <div className="grid grid-cols-2 gap-4">
                     <div>
-                        <label className="block text-sm font-medium text-zinc-400 mb-1">Type</label>
+                        <label className="block text-sm font-medium text-neutral-500 dark:text-zinc-400 mb-1">Type</label>
                         <select
-                            className="w-full rounded-xl bg-zinc-950 border border-white/5 px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-violet-500/50 appearance-none"
+                            className="w-full rounded-xl bg-neutral-50 dark:bg-zinc-950 border border-neutral-200 dark:border-white/5 px-4 py-2 text-neutral-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-violet-500/50 appearance-none"
                             value={formData.type}
                             onChange={e => setFormData({ ...formData, type: e.target.value })}
                         >
@@ -83,10 +83,10 @@ export default function AddDocumentModal({ isOpen, onClose, onSuccess, vehicleId
                         </select>
                     </div>
                     <div>
-                        <label className="block text-sm font-medium text-zinc-400 mb-1">Expiry Date <span className="text-zinc-600 text-xs">(Optional)</span></label>
+                        <label className="block text-sm font-medium text-neutral-500 dark:text-zinc-400 mb-1">Expiry Date <span className="text-neutral-500 dark:text-zinc-600 text-xs">(Optional)</span></label>
                         <input
                             type="date"
-                            className="w-full rounded-xl bg-zinc-950 border border-white/5 px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-violet-500/50"
+                            className="w-full rounded-xl bg-neutral-50 dark:bg-zinc-950 border border-neutral-200 dark:border-white/5 px-4 py-2 text-neutral-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-violet-500/50"
                             value={formData.expiry_date}
                             onChange={e => setFormData({ ...formData, expiry_date: e.target.value })}
                         />
@@ -94,21 +94,21 @@ export default function AddDocumentModal({ isOpen, onClose, onSuccess, vehicleId
                 </div>
 
                 <div>
-                    <label className="block text-sm font-medium text-zinc-400 mb-1">File URL</label>
+                    <label className="block text-sm font-medium text-neutral-500 dark:text-zinc-400 mb-1">File URL</label>
                     <input
                         type="url"
                         required
                         placeholder="https://..."
-                        className="w-full rounded-xl bg-zinc-950 border border-white/5 px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-violet-500/50"
+                        className="w-full rounded-xl bg-neutral-50 dark:bg-zinc-950 border border-neutral-200 dark:border-white/5 px-4 py-2 text-neutral-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-violet-500/50"
                         value={formData.file_url}
                         onChange={e => setFormData({ ...formData, file_url: e.target.value })}
                     />
                 </div>
 
                 <div>
-                    <label className="block text-sm font-medium text-zinc-400 mb-1">Notes</label>
+                    <label className="block text-sm font-medium text-neutral-500 dark:text-zinc-400 mb-1">Notes</label>
                     <textarea
-                        className="w-full rounded-xl bg-zinc-950 border border-white/5 px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-violet-500/50 min-h-[80px]"
+                        className="w-full rounded-xl bg-neutral-50 dark:bg-zinc-950 border border-neutral-200 dark:border-white/5 px-4 py-2 text-neutral-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-violet-500/50 min-h-[80px]"
                         value={formData.notes}
                         onChange={e => setFormData({ ...formData, notes: e.target.value })}
                     />

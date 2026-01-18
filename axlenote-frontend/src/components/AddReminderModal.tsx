@@ -56,20 +56,20 @@ export default function AddReminderModal({ isOpen, onClose, onSuccess, vehicleId
             <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="grid grid-cols-3 gap-4">
                     <div className="col-span-2">
-                        <label className="block text-sm font-medium text-zinc-400 mb-1">Title</label>
+                        <label className="block text-sm font-medium text-neutral-500 dark:text-zinc-400 mb-1">Title</label>
                         <input
                             type="text"
                             required
                             placeholder="e.g. Oil Change"
-                            className="w-full rounded-xl bg-zinc-950 border border-white/5 px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-violet-500/50"
+                            className="w-full rounded-xl bg-neutral-50 dark:bg-zinc-950 border border-neutral-200 dark:border-white/5 px-4 py-2 text-neutral-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-violet-500/50"
                             value={formData.title}
                             onChange={e => setFormData({ ...formData, title: e.target.value })}
                         />
                     </div>
                     <div className="col-span-1">
-                        <label className="block text-sm font-medium text-zinc-400 mb-1">Type</label>
+                        <label className="block text-sm font-medium text-neutral-500 dark:text-zinc-400 mb-1">Type</label>
                         <select
-                            className="w-full rounded-xl bg-zinc-950 border border-white/5 px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-violet-500/50 appearance-none"
+                            className="w-full rounded-xl bg-neutral-50 dark:bg-zinc-950 border border-neutral-200 dark:border-white/5 px-4 py-2 text-neutral-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-violet-500/50 appearance-none"
                             value={formData.type}
                             onChange={e => setFormData({ ...formData, type: e.target.value })}
                         >
@@ -83,53 +83,53 @@ export default function AddReminderModal({ isOpen, onClose, onSuccess, vehicleId
 
                 <div className="grid grid-cols-2 gap-4">
                     <div>
-                        <label className="block text-sm font-medium text-zinc-400 mb-1">Due Date</label>
+                        <label className="block text-sm font-medium text-neutral-500 dark:text-zinc-400 mb-1">Due Date</label>
                         <input
                             type="date"
-                            className="w-full rounded-xl bg-zinc-950 border border-white/5 px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-violet-500/50"
+                            className="w-full rounded-xl bg-neutral-50 dark:bg-zinc-950 border border-neutral-200 dark:border-white/5 px-4 py-2 text-neutral-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-violet-500/50"
                             value={formData.due_date}
                             onChange={e => setFormData({ ...formData, due_date: e.target.value })}
                         />
                     </div>
                     <div>
-                        <label className="block text-sm font-medium text-zinc-400 mb-1">Due Odometer</label>
+                        <label className="block text-sm font-medium text-neutral-500 dark:text-zinc-400 mb-1">Due Odometer</label>
                         <input
                             type="number"
-                            className="w-full rounded-xl bg-zinc-950 border border-white/5 px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-violet-500/50"
+                            className="w-full rounded-xl bg-neutral-50 dark:bg-zinc-950 border border-neutral-200 dark:border-white/5 px-4 py-2 text-neutral-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-violet-500/50"
                             value={formData.due_odometer}
                             onChange={e => setFormData({ ...formData, due_odometer: parseInt(e.target.value) })}
                         />
                     </div>
                 </div>
 
-                <div className="bg-zinc-900 border border-white/5 p-4 rounded-xl">
+                <div className="bg-neutral-50 dark:bg-zinc-900 border border-neutral-200 dark:border-white/5 p-4 rounded-xl">
                     <div className="flex items-center gap-3 mb-3">
                         <input
                             type="checkbox"
                             id="is_recurring"
                             checked={formData.is_recurring}
                             onChange={e => setFormData({ ...formData, is_recurring: e.target.checked })}
-                            className="w-5 h-5 rounded border-zinc-700 bg-zinc-800 text-violet-500 focus:ring-violet-500/50 cursor-pointer accent-violet-500"
+                            className="w-5 h-5 rounded border-neutral-300 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-violet-500 focus:ring-violet-500/50 cursor-pointer accent-violet-500"
                         />
-                        <label htmlFor="is_recurring" className="text-sm font-bold text-white cursor-pointer select-none">Recurring Reminder</label>
+                        <label htmlFor="is_recurring" className="text-sm font-bold text-neutral-900 dark:text-white cursor-pointer select-none">Recurring Reminder</label>
                     </div>
 
                     {formData.is_recurring && (
                         <div className="grid grid-cols-2 gap-4 animate-in fade-in slide-in-from-top-2 duration-200">
                             <div>
-                                <label className="block text-xs text-zinc-500 mb-1 font-bold uppercase">Every (km)</label>
+                                <label className="block text-xs text-neutral-500 dark:text-zinc-500 mb-1 font-bold uppercase">Every (km)</label>
                                 <input
                                     type="number"
-                                    className="w-full rounded-lg bg-zinc-950 border border-white/5 px-3 py-1.5 text-white text-sm focus:outline-none focus:ring-1 focus:ring-violet-500/50"
+                                    className="w-full rounded-lg bg-neutral-50 dark:bg-zinc-950 border border-neutral-200 dark:border-white/5 px-3 py-1.5 text-neutral-900 dark:text-white text-sm focus:outline-none focus:ring-1 focus:ring-violet-500/50"
                                     value={formData.interval_km}
                                     onChange={e => setFormData({ ...formData, interval_km: parseInt(e.target.value) })}
                                 />
                             </div>
                             <div>
-                                <label className="block text-xs text-zinc-500 mb-1 font-bold uppercase">Every (months)</label>
+                                <label className="block text-xs text-neutral-500 dark:text-zinc-500 mb-1 font-bold uppercase">Every (months)</label>
                                 <input
                                     type="number"
-                                    className="w-full rounded-lg bg-zinc-950 border border-white/5 px-3 py-1.5 text-white text-sm focus:outline-none focus:ring-1 focus:ring-violet-500/50"
+                                    className="w-full rounded-lg bg-neutral-50 dark:bg-zinc-950 border border-neutral-200 dark:border-white/5 px-3 py-1.5 text-neutral-900 dark:text-white text-sm focus:outline-none focus:ring-1 focus:ring-violet-500/50"
                                     value={formData.interval_months}
                                     onChange={e => setFormData({ ...formData, interval_months: parseInt(e.target.value) })}
                                 />

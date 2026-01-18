@@ -83,21 +83,21 @@ export default function AddServiceModal({ isOpen, onClose, onSuccess, vehicleId,
             <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="grid grid-cols-2 gap-4">
                     <div>
-                        <label className="block text-sm font-medium text-zinc-400 mb-1">Date</label>
+                        <label className="block text-sm font-medium text-neutral-500 dark:text-zinc-400 mb-1">Date</label>
                         <input
                             type="date"
                             required
-                            className="w-full rounded-xl bg-zinc-950 border border-white/5 px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-violet-500/50"
+                            className="w-full rounded-xl bg-neutral-50 dark:bg-zinc-950 border border-neutral-200 dark:border-white/5 px-4 py-2 text-neutral-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-violet-500/50"
                             value={formData.date}
                             onChange={e => setFormData({ ...formData, date: e.target.value })}
                         />
                     </div>
                     <div>
-                        <label className="block text-sm font-medium text-zinc-400 mb-1">Odometer</label>
+                        <label className="block text-sm font-medium text-neutral-500 dark:text-zinc-400 mb-1">Odometer</label>
                         <input
                             type="number"
                             required
-                            className="w-full rounded-xl bg-zinc-950 border border-white/5 px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-violet-500/50"
+                            className="w-full rounded-xl bg-neutral-50 dark:bg-zinc-950 border border-neutral-200 dark:border-white/5 px-4 py-2 text-neutral-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-violet-500/50"
                             value={formData.odometer}
                             onChange={e => setFormData({ ...formData, odometer: parseInt(e.target.value) })}
                         />
@@ -105,23 +105,23 @@ export default function AddServiceModal({ isOpen, onClose, onSuccess, vehicleId,
                 </div>
                 <div className="grid grid-cols-2 gap-4">
                     <div>
-                        <label className="block text-sm font-medium text-zinc-400 mb-1">Cost</label>
+                        <label className="block text-sm font-medium text-neutral-500 dark:text-zinc-400 mb-1">Cost</label>
                         <div className="relative">
-                            <span className="absolute left-4 top-2 text-zinc-500">₹</span>
+                            <span className="absolute left-4 top-2 text-neutral-500 dark:text-zinc-500">₹</span>
                             <input
                                 type="number"
                                 step="0.01"
                                 required
-                                className="w-full pl-8 rounded-xl bg-zinc-950 border border-white/5 px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-violet-500/50"
+                                className="w-full pl-8 rounded-xl bg-neutral-50 dark:bg-zinc-950 border border-neutral-200 dark:border-white/5 px-4 py-2 text-neutral-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-violet-500/50"
                                 value={formData.cost}
                                 onChange={e => setFormData({ ...formData, cost: parseFloat(e.target.value) })}
                             />
                         </div>
                     </div>
                     <div>
-                        <label className="block text-sm font-medium text-zinc-400 mb-1">Type</label>
+                        <label className="block text-sm font-medium text-neutral-500 dark:text-zinc-400 mb-1">Type</label>
                         <select
-                            className="w-full rounded-xl bg-zinc-950 border border-white/5 px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-violet-500/50 appearance-none"
+                            className="w-full rounded-xl bg-neutral-50 dark:bg-zinc-950 border border-neutral-200 dark:border-white/5 px-4 py-2 text-neutral-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-violet-500/50 appearance-none"
                             value={formData.service_type}
                             onChange={e => setFormData({ ...formData, service_type: e.target.value })}
                         >
@@ -132,24 +132,24 @@ export default function AddServiceModal({ isOpen, onClose, onSuccess, vehicleId,
                     </div>
                 </div>
                 <div>
-                    <label className="block text-sm font-medium text-zinc-400 mb-1">Document URL <span className="text-zinc-600 text-xs">(Pdf/Image, optional)</span></label>
+                    <label className="block text-sm font-medium text-neutral-500 dark:text-zinc-400 mb-1">Document URL <span className="text-neutral-500 dark:text-zinc-600 text-xs">(Pdf/Image, optional)</span></label>
                     <input
                         type="url"
                         placeholder="https://example.com/invoice.pdf"
-                        className="w-full rounded-xl bg-zinc-950 border border-white/5 px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-violet-500/50 placeholder:text-zinc-700"
+                        className="w-full rounded-xl bg-neutral-50 dark:bg-zinc-950 border border-neutral-200 dark:border-white/5 px-4 py-2 text-neutral-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-violet-500/50 placeholder:text-neutral-400 dark:placeholder:text-zinc-700"
                         value={formData.document_url}
                         onChange={e => setFormData({ ...formData, document_url: e.target.value })}
                     />
                 </div>
                 {formData.service_type === 'maintenance' && (
-                    <div className="bg-zinc-900 border border-white/5 rounded-xl p-4">
-                        <label className="block text-sm font-medium text-zinc-400 mb-2">Common Maintenance Items</label>
+                    <div className="bg-neutral-50 dark:bg-zinc-900 border border-neutral-200 dark:border-white/5 rounded-xl p-4">
+                        <label className="block text-sm font-medium text-neutral-500 dark:text-zinc-400 mb-2">Common Maintenance Items</label>
                         <div className="grid grid-cols-2 gap-2">
                             {['Oil Change', 'Air Filter', 'Chain Cleaning', 'Coolant Top-up', 'Brake Pads', 'Tire Pressure', 'Washing', 'General Service'].map(item => (
-                                <label key={item} className="flex items-center space-x-2 text-sm text-zinc-300 cursor-pointer hover:text-white">
+                                <label key={item} className="flex items-center space-x-2 text-sm text-neutral-600 dark:text-zinc-300 cursor-pointer hover:text-neutral-900 dark:hover:text-white">
                                     <input
                                         type="checkbox"
-                                        className="rounded border-zinc-700 bg-zinc-800 text-violet-500 focus:ring-violet-500/50"
+                                        className="rounded border-neutral-300 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-violet-500 focus:ring-violet-500/50"
                                         checked={maintenanceItems.includes(item)}
                                         onChange={(e) => {
                                             if (e.target.checked) setMaintenanceItems([...maintenanceItems, item])
@@ -163,9 +163,9 @@ export default function AddServiceModal({ isOpen, onClose, onSuccess, vehicleId,
                     </div>
                 )}
                 <div>
-                    <label className="block text-sm font-medium text-zinc-400 mb-1">Notes</label>
+                    <label className="block text-sm font-medium text-neutral-500 dark:text-zinc-400 mb-1">Notes</label>
                     <textarea
-                        className="w-full rounded-xl bg-zinc-950 border border-white/5 px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-violet-500/50 min-h-[100px] placeholder:text-zinc-700"
+                        className="w-full rounded-xl bg-neutral-50 dark:bg-zinc-950 border border-neutral-200 dark:border-white/5 px-4 py-2 text-neutral-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-violet-500/50 min-h-[100px] placeholder:text-neutral-400 dark:placeholder:text-zinc-700"
                         placeholder="What else did you do?"
                         value={formData.notes}
                         onChange={e => setFormData({ ...formData, notes: e.target.value })}

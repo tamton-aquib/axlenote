@@ -116,22 +116,22 @@ export default function AddFuelModal({ isOpen, onClose, onSuccess, vehicleId, in
             <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="flex gap-4">
                     <div className="flex-1">
-                        <label className="block text-xs font-bold text-zinc-500 uppercase tracking-wider mb-1">Date</label>
+                        <label className="block text-xs font-bold text-neutral-500 dark:text-zinc-500 uppercase tracking-wider mb-1">Date</label>
                         <input
                             type="date"
                             required
-                            className="w-full bg-zinc-950 border-b border-zinc-800 pb-2 text-white outline-none focus:border-emerald-500 transition-colors placeholder:text-zinc-600 font-mono"
+                            className="w-full bg-transparent border-b border-neutral-200 dark:border-zinc-800 pb-2 text-neutral-900 dark:text-white outline-none focus:border-emerald-500 transition-colors placeholder:text-neutral-400 dark:placeholder:text-zinc-600 font-mono"
                             value={formData.date}
                             onChange={e => setFormData({ ...formData, date: e.target.value })}
                         />
                     </div>
                     <div className="flex-1">
-                        <label className="block text-xs font-bold text-zinc-500 uppercase tracking-wider mb-1">Odometer</label>
+                        <label className="block text-xs font-bold text-neutral-500 dark:text-zinc-500 uppercase tracking-wider mb-1">Odometer</label>
                         <input
                             type="number"
                             required
                             placeholder="Current reading"
-                            className="w-full bg-zinc-950 border-b border-zinc-800 pb-2 text-white outline-none focus:border-emerald-500 transition-colors placeholder:text-zinc-600 font-mono"
+                            className="w-full bg-transparent border-b border-neutral-200 dark:border-zinc-800 pb-2 text-neutral-900 dark:text-white outline-none focus:border-emerald-500 transition-colors placeholder:text-neutral-400 dark:placeholder:text-zinc-600 font-mono"
                             value={formData.odometer}
                             onChange={e => setFormData({ ...formData, odometer: e.target.value })}
                         />
@@ -140,28 +140,28 @@ export default function AddFuelModal({ isOpen, onClose, onSuccess, vehicleId, in
 
                 <div className="grid grid-cols-3 gap-4">
                     <div className="col-span-1">
-                        <label className="block text-xs font-bold text-zinc-500 uppercase tracking-wider mb-1">Price / L</label>
+                        <label className="block text-xs font-bold text-neutral-500 dark:text-zinc-500 uppercase tracking-wider mb-1">Price / L</label>
                         <div className="flex items-center">
-                            <span className="text-zinc-500 mr-1 text-sm">₹</span>
+                            <span className="text-neutral-500 dark:text-zinc-500 mr-1 text-sm">₹</span>
                             <input
                                 type="number"
                                 step="0.01"
                                 required
                                 placeholder="Rate"
-                                className="w-full bg-zinc-950 border-b border-zinc-800 pb-2 text-white outline-none focus:border-emerald-500 transition-colors placeholder:text-zinc-600 font-mono"
+                                className="w-full bg-transparent border-b border-neutral-200 dark:border-zinc-800 pb-2 text-neutral-900 dark:text-white outline-none focus:border-emerald-500 transition-colors placeholder:text-neutral-400 dark:placeholder:text-zinc-600 font-mono"
                                 value={formData.price_per_liter}
                                 onChange={e => handleChange('price', e.target.value)}
                             />
                         </div>
                     </div>
                     <div className="col-span-1">
-                        <label className="block text-xs font-bold text-zinc-500 uppercase tracking-wider mb-1">Liters</label>
+                        <label className="block text-xs font-bold text-neutral-500 dark:text-zinc-500 uppercase tracking-wider mb-1">Liters</label>
                         <input
                             type="number"
                             step="0.01"
                             required
                             placeholder="Vol"
-                            className={`w-full bg-zinc-950 border-b border-zinc-800 pb-2 text-white outline-none focus:border-emerald-500 transition-colors placeholder:text-zinc-600 font-mono ${formData.full_tank ? 'opacity-50 cursor-not-allowed' : ''}`}
+                            className={`w-full bg-transparent border-b border-neutral-200 dark:border-zinc-800 pb-2 text-neutral-900 dark:text-white outline-none focus:border-emerald-500 transition-colors placeholder:text-neutral-400 dark:placeholder:text-zinc-600 font-mono ${formData.full_tank ? 'opacity-50 cursor-not-allowed' : ''}`}
                             value={formData.liters}
                             onChange={e => handleChange('liters', e.target.value)}
                             disabled={formData.full_tank}
@@ -169,15 +169,15 @@ export default function AddFuelModal({ isOpen, onClose, onSuccess, vehicleId, in
                     </div>
 
                     <div className="col-span-1">
-                        <label className="block text-xs font-bold text-zinc-500 uppercase tracking-wider mb-1">Total</label>
+                        <label className="block text-xs font-bold text-neutral-500 dark:text-zinc-500 uppercase tracking-wider mb-1">Total</label>
                         <div className="flex items-center">
-                            <span className="text-zinc-500 mr-1 text-sm">₹</span>
+                            <span className="text-neutral-500 dark:text-zinc-500 mr-1 text-sm">₹</span>
                             <input
                                 type="number"
                                 step="0.01"
                                 required
                                 placeholder="Cost"
-                                className="w-full bg-zinc-950 border-b border-zinc-800 pb-2 text-white outline-none focus:border-emerald-500 transition-colors placeholder:text-zinc-600 font-bold font-mono"
+                                className="w-full bg-transparent border-b border-neutral-200 dark:border-zinc-800 pb-2 text-neutral-900 dark:text-white outline-none focus:border-emerald-500 transition-colors placeholder:text-neutral-400 dark:placeholder:text-zinc-600 font-bold font-mono"
                                 value={formData.total_cost}
                                 onChange={e => handleChange('total', e.target.value)}
                             />
@@ -185,15 +185,15 @@ export default function AddFuelModal({ isOpen, onClose, onSuccess, vehicleId, in
                     </div>
                 </div>
 
-                <div className="flex items-center justify-between py-2 border-t border-b border-white/5 bg-zinc-900/50 rounded px-2 -mx-2">
-                    <label htmlFor="full_tank" className={`text-sm font-medium text-zinc-300 select-none ${(!formData.full_tank && formData.price_per_liter && formData.liters) ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}>Full Tank Fill?</label>
+                <div className="flex items-center justify-between py-2 border-t border-b border-neutral-200 dark:border-white/5 bg-neutral-50 dark:bg-zinc-900/50 rounded px-2 -mx-2">
+                    <label htmlFor="full_tank" className={`text-sm font-medium text-neutral-700 dark:text-zinc-300 select-none ${(!formData.full_tank && formData.price_per_liter && formData.liters) ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}>Full Tank Fill?</label>
                     <input
                         type="checkbox"
                         id="full_tank"
                         checked={formData.full_tank}
                         onChange={e => setFormData({ ...formData, full_tank: e.target.checked })}
                         disabled={!formData.full_tank && String(formData.price_per_liter ?? '') !== '' && String(formData.liters ?? '') !== ''}
-                        className="w-5 h-5 rounded border-zinc-700 bg-zinc-800 text-emerald-500 focus:ring-emerald-500/50 cursor-pointer accent-emerald-500 disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="w-5 h-5 rounded border-neutral-300 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-emerald-500 focus:ring-emerald-500/50 cursor-pointer accent-emerald-500 disabled:opacity-50 disabled:cursor-not-allowed"
                     />
                 </div>
 

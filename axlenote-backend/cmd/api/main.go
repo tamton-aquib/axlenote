@@ -82,6 +82,7 @@ func main() {
 	api.Get("/vehicles", h.GetVehicles)
 	api.Post("/vehicles", h.CreateVehicle)
 	api.Get("/vehicles/:id", h.GetVehicle)
+	api.Put("/vehicles/:id", h.UpdateVehicle)
 	api.Delete("/vehicles/:id", h.DeleteVehicle)
 
 	api.Get("/vehicles/:vehicleId/services", h.ListServiceRecords)

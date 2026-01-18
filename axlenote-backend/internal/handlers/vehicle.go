@@ -76,6 +76,40 @@ func (h *Handler) CreateVehicle(c *fiber.Ctx) error {
 	return c.Status(201).JSON(fiber.Map{"data": mapVehicleToResponse(vehicle)})
 }
 
+func (h *Handler) UpdateVehicle(c *fiber.Ctx) error {
+	id, err := strconv.Atoi(c.Params("id"))
+	if err != nil {
+		return c.Status(400).JSON(fiber.Map{"error": "Invalid vehicle ID"})
+	}
+
+	var req CreateVehicleRequest
+	if err := c.BodyParser(&req); err != nil {
+		return c.Status(400).JSON(fiber.Map{"error": "Invalid request body"})
+	}
+
+	if req.Name == "" {
+		return c.Status(400).JSON(fiber.Map{"error": "Name is required"})
+	}
+
+	vehicle, err := h.queries.UpdateVehicle(c.Context(), repository.UpdateVehicleParams{
+		ID:           int32(id),
+		Name:         req.Name,
+		Make:         sql.NullString{String: req.Make, Valid: req.Make != ""},
+		Model:        sql.NullString{String: req.Model, Valid: req.Model != ""},
+		Year:         sql.NullInt32{Int32: req.Year, Valid: req.Year > 0},
+		Type:         sql.NullString{String: req.Type, Valid: req.Type != ""},
+		Vin:          sql.NullString{String: req.Vin, Valid: req.Vin != ""},
+		LicensePlate: sql.NullString{String: req.LicensePlate, Valid: req.LicensePlate != ""},
+		ImageUrl:     sql.NullString{String: req.ImageUrl, Valid: req.ImageUrl != ""},
+	})
+
+	if err != nil {
+		return c.Status(500).JSON(fiber.Map{"error": "Failed to update vehicle", "details": err.Error()})
+	}
+
+	return c.JSON(fiber.Map{"data": mapVehicleToResponse(vehicle)})
+}
+
 func (h *Handler) DeleteVehicle(c *fiber.Ctx) error {
 	id, err := strconv.Atoi(c.Params("id"))
 	if err != nil {

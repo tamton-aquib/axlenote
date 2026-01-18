@@ -19,6 +19,11 @@ UPDATE vehicles
 SET name = $2, make = $3, model = $4, year = $5, type = $6, vin = $7, license_plate = $8, image_url = $9, updated_at = NOW()
 WHERE id = $1
 RETURNING *;
+-- name: UpdateVehicle :one
+UPDATE vehicles
+SET name = $2, make = $3, model = $4, year = $5, type = $6, vin = $7, license_plate = $8, image_url = $9, updated_at = NOW()
+WHERE id = $1
+RETURNING *;
 
 -- name: DeleteVehicle :exec
 DELETE FROM vehicles
