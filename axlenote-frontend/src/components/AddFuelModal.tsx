@@ -17,7 +17,7 @@ export default function AddFuelModal({ isOpen, onClose, onSuccess, vehicleId, in
         liters: '' as any,
         price_per_liter: '' as any,
         total_cost: '' as any,
-        full_tank: true,
+        full_tank: false,
         notes: '',
     }
 
@@ -42,24 +42,37 @@ export default function AddFuelModal({ isOpen, onClose, onSuccess, vehicleId, in
 
     // Dynamic Calculation Logic
     const handleChange = (field: 'liters' | 'price' | 'total', value: string) => {
-        const numValue = parseFloat(value)
         const newData = { ...formData, [field === 'price' ? 'price_per_liter' : field === 'total' ? 'total_cost' : field]: value }
 
         const price = parseFloat(newData.price_per_liter)
         const liters = parseFloat(newData.liters)
+        const total = parseFloat(newData.total_cost)
 
-        if (field === 'liters' && !isNaN(price) && !isNaN(numValue)) {
-            newData.total_cost = (numValue * price).toFixed(2)
+        // Rule 1: Liters and Price filled -> Caluclate Total
+        if ((field === 'liters' || field === 'price') && !isNaN(price) && !isNaN(liters)) {
+            newData.total_cost = (liters * price).toFixed(2)
         }
-        else if (field === 'price' && !isNaN(liters) && !isNaN(numValue)) {
-            newData.total_cost = (liters * numValue).toFixed(2)
+        else if ((field === 'liters' || field === 'total') && !isNaN(liters) && !isNaN(total) && liters > 0) {
+            newData.price_per_liter = (total / liters).toFixed(2)
         }
-        else if (field === 'total' && !isNaN(price) && !isNaN(numValue) && price > 0) {
-            newData.liters = (numValue / price).toFixed(2)
+        else if ((field === 'total' || field === 'price') && !isNaN(total) && !isNaN(price) && price > 0) {
+            newData.liters = (total / price).toFixed(2)
         }
 
         setFormData(newData)
     }
+
+    // Effect for Full Tank mode
+    useEffect(() => {
+        if (formData.full_tank) {
+            // Recalculate liters if possible
+            const price = parseFloat(formData.price_per_liter)
+            const total = parseFloat(formData.total_cost)
+            if (!isNaN(price) && !isNaN(total) && price > 0) {
+                setFormData(prev => ({ ...prev, liters: (total / price).toFixed(2) }))
+            }
+        }
+    }, [formData.full_tank, formData.price_per_liter, formData.total_cost])
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
@@ -148,9 +161,10 @@ export default function AddFuelModal({ isOpen, onClose, onSuccess, vehicleId, in
                             step="0.01"
                             required
                             placeholder="Vol"
-                            className="w-full bg-zinc-950 border-b border-zinc-800 pb-2 text-white outline-none focus:border-emerald-500 transition-colors placeholder:text-zinc-600 font-mono"
+                            className={`w-full bg-zinc-950 border-b border-zinc-800 pb-2 text-white outline-none focus:border-emerald-500 transition-colors placeholder:text-zinc-600 font-mono ${formData.full_tank ? 'opacity-50 cursor-not-allowed' : ''}`}
                             value={formData.liters}
                             onChange={e => handleChange('liters', e.target.value)}
+                            disabled={formData.full_tank}
                         />
                     </div>
 
@@ -172,13 +186,14 @@ export default function AddFuelModal({ isOpen, onClose, onSuccess, vehicleId, in
                 </div>
 
                 <div className="flex items-center justify-between py-2 border-t border-b border-white/5 bg-zinc-900/50 rounded px-2 -mx-2">
-                    <label htmlFor="full_tank" className="text-sm font-medium text-zinc-300 cursor-pointer select-none">Full Tank Fill?</label>
+                    <label htmlFor="full_tank" className={`text-sm font-medium text-zinc-300 select-none ${(!formData.full_tank && formData.price_per_liter && formData.liters) ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}>Full Tank Fill?</label>
                     <input
                         type="checkbox"
                         id="full_tank"
                         checked={formData.full_tank}
                         onChange={e => setFormData({ ...formData, full_tank: e.target.checked })}
-                        className="w-5 h-5 rounded border-zinc-700 bg-zinc-800 text-emerald-500 focus:ring-emerald-500/50 cursor-pointer accent-emerald-500"
+                        disabled={!formData.full_tank && String(formData.price_per_liter ?? '') !== '' && String(formData.liters ?? '') !== ''}
+                        className="w-5 h-5 rounded border-zinc-700 bg-zinc-800 text-emerald-500 focus:ring-emerald-500/50 cursor-pointer accent-emerald-500 disabled:opacity-50 disabled:cursor-not-allowed"
                     />
                 </div>
 

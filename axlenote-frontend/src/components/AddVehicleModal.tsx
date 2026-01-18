@@ -16,6 +16,7 @@ export default function AddVehicleModal({ isOpen, onClose, onSuccess }: AddVehic
         type: 'bike',
         vin: '',
         license_plate: '',
+        image_url: ''
     })
     const [loading, setLoading] = useState(false)
 
@@ -32,7 +33,7 @@ export default function AddVehicleModal({ isOpen, onClose, onSuccess }: AddVehic
                 onSuccess()
                 onClose()
                 setFormData({
-                    name: '', make: '', model: '', year: new Date().getFullYear(), type: 'bike', vin: '', license_plate: ''
+                    name: '', make: '', model: '', year: new Date().getFullYear(), type: 'bike', vin: '', license_plate: '', image_url: ''
                 })
             } else {
                 alert("Failed to create vehicle")
@@ -102,6 +103,16 @@ export default function AddVehicleModal({ isOpen, onClose, onSuccess }: AddVehic
                             <option value="car">Car</option>
                         </select>
                     </div>
+                </div>
+                <div>
+                    <label className="block text-sm font-medium text-slate-400 mb-1">Image URL (Optional)</label>
+                    <input
+                        type="url"
+                        className="w-full rounded-lg bg-slate-950 border border-slate-800 px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500/50"
+                        placeholder="https://example.com/car.jpg"
+                        value={formData.image_url}
+                        onChange={e => setFormData({ ...formData, image_url: e.target.value })}
+                    />
                 </div>
                 <div className="grid grid-cols-2 gap-4">
                     <div>

@@ -21,6 +21,7 @@ export default function AddServiceModal({ isOpen, onClose, onSuccess, vehicleId,
     }
 
     const [formData, setFormData] = useState(defaultForm)
+    const [maintenanceItems, setMaintenanceItems] = useState<string[]>([])
     const [loading, setLoading] = useState(false)
 
     useEffect(() => {
@@ -35,6 +36,7 @@ export default function AddServiceModal({ isOpen, onClose, onSuccess, vehicleId,
             })
         } else if (isOpen && !initialData) {
             setFormData(defaultForm)
+            setMaintenanceItems([])
         }
     }, [isOpen, initialData])
 
@@ -42,9 +44,14 @@ export default function AddServiceModal({ isOpen, onClose, onSuccess, vehicleId,
         e.preventDefault()
         setLoading(true)
         try {
+            const finalNotes = maintenanceItems.length > 0
+                ? `[Maintenance: ${maintenanceItems.join(', ')}]\n\n${formData.notes}`
+                : formData.notes
+
             const payload = {
                 vehicle_id: vehicleId,
                 ...formData,
+                notes: finalNotes,
                 cost: Number(formData.cost) // Ensure number
             }
 
@@ -60,6 +67,7 @@ export default function AddServiceModal({ isOpen, onClose, onSuccess, vehicleId,
                 onSuccess()
                 onClose()
                 setFormData(defaultForm)
+                setMaintenanceItems([])
             } else {
                 alert(`Failed to ${initialData ? 'update' : 'add'} service record`)
             }
@@ -133,11 +141,32 @@ export default function AddServiceModal({ isOpen, onClose, onSuccess, vehicleId,
                         onChange={e => setFormData({ ...formData, document_url: e.target.value })}
                     />
                 </div>
+                {formData.service_type === 'maintenance' && (
+                    <div className="bg-zinc-900 border border-white/5 rounded-xl p-4">
+                        <label className="block text-sm font-medium text-zinc-400 mb-2">Common Maintenance Items</label>
+                        <div className="grid grid-cols-2 gap-2">
+                            {['Oil Change', 'Air Filter', 'Chain Cleaning', 'Coolant Top-up', 'Brake Pads', 'Tire Pressure', 'Washing', 'General Service'].map(item => (
+                                <label key={item} className="flex items-center space-x-2 text-sm text-zinc-300 cursor-pointer hover:text-white">
+                                    <input
+                                        type="checkbox"
+                                        className="rounded border-zinc-700 bg-zinc-800 text-violet-500 focus:ring-violet-500/50"
+                                        checked={maintenanceItems.includes(item)}
+                                        onChange={(e) => {
+                                            if (e.target.checked) setMaintenanceItems([...maintenanceItems, item])
+                                            else setMaintenanceItems(maintenanceItems.filter(i => i !== item))
+                                        }}
+                                    />
+                                    <span>{item}</span>
+                                </label>
+                            ))}
+                        </div>
+                    </div>
+                )}
                 <div>
                     <label className="block text-sm font-medium text-zinc-400 mb-1">Notes</label>
                     <textarea
                         className="w-full rounded-xl bg-zinc-950 border border-white/5 px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-violet-500/50 min-h-[100px] placeholder:text-zinc-700"
-                        placeholder="What did you do?"
+                        placeholder="What else did you do?"
                         value={formData.notes}
                         onChange={e => setFormData({ ...formData, notes: e.target.value })}
                     />

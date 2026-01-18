@@ -8,7 +8,7 @@ import AddDocumentModal from '../components/AddDocumentModal'
 import CountUp from '../components/CountUp'
 import clsx from 'clsx'
 import { formatDate } from '../utils'
-import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, Legend, BarChart, Bar, XAxis, YAxis, CartesianGrid } from 'recharts'
+import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, Legend, BarChart, Bar, XAxis, YAxis, CartesianGrid, LineChart, Line } from 'recharts'
 
 export default function VehicleDetails() {
   const { id } = useParams()
@@ -132,6 +132,16 @@ export default function VehicleDetails() {
   }
 
   const trendData = getLast6MonthsData()
+
+  // Mileage Calculation
+  const mileageData = fuelLogs
+    .filter(f => f.full_tank && f.mileage > 0)
+    .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
+    .map(f => ({
+      date: formatDate(f.date),
+      mileage: Number(f.mileage.toFixed(1)),
+      fullDate: f.date
+    }));
 
 
   return (
@@ -473,6 +483,27 @@ export default function VehicleDetails() {
         {/* ANALYTICS TAB */}
         {activeTab === 'analytics' && stats && (
           <div className="space-y-8">
+            {/* Efficiency Chart - New */}
+            {mileageData.length > 1 && (
+              <div className="bg-neutral-900 border border-white/5 p-6 rounded-xl">
+                <h3 className="text-lg font-bold text-white mb-6">Fuel Efficiency Trend</h3>
+                <div className="h-[300px]">
+                  <ResponsiveContainer width="100%" height="100%">
+                    <LineChart data={mileageData}>
+                      <CartesianGrid strokeDasharray="3 3" stroke="#262626" vertical={false} />
+                      <XAxis dataKey="date" stroke="#525252" tick={{ fill: '#737373', fontSize: 12 }} tickLine={false} axisLine={false} />
+                      <YAxis stroke="#525252" tick={{ fill: '#737373', fontSize: 12 }} tickLine={false} axisLine={false} domain={['auto', 'auto']} />
+                      <Tooltip
+                        contentStyle={{ backgroundColor: '#171717', borderColor: '#262626', borderRadius: '0.75rem', color: '#f5f5f5' }}
+                        cursor={{ stroke: 'rgba(255,255,255,0.1)', strokeWidth: 2 }}
+                      />
+                      <Line type="monotone" dataKey="mileage" stroke="#8b5cf6" strokeWidth={3} dot={{ r: 4, fill: '#8b5cf6', strokeWidth: 0 }} activeDot={{ r: 6, fill: '#fff' }} name="Efficiency (km/L)" />
+                    </LineChart>
+                  </ResponsiveContainer>
+                </div>
+              </div>
+            )}
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {/* Cost Distribution Chart */}
               <div className="bg-neutral-900 border border-white/5 p-6 rounded-xl">

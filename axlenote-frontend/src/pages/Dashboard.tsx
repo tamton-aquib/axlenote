@@ -125,33 +125,41 @@ export default function Dashboard() {
                         {vehicles.map(v => (
                             <Link key={v.id} to={`/vehicle/${v.id}`} className="block h-full card-hover-effect">
                                 <div className="group relative bg-zinc-900 rounded-3xl p-1 border border-white/5 hover:border-violet-500/30 transition-all duration-300 hover:shadow-2xl hover:shadow-violet-500/10 h-full flex flex-col overflow-hidden">
-                                    <div className="p-6 flex-1 flex flex-col">
+                                    {v.image_url && (
+                                        <>
+                                            <div className="absolute inset-0 z-0">
+                                                <img src={v.image_url} alt={v.name} className="w-full h-full object-cover opacity-40 group-hover:scale-105 transition-transform duration-700" />
+                                                <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/80 to-transparent" />
+                                            </div>
+                                        </>
+                                    )}
+                                    <div className="p-6 flex-1 flex flex-col relative z-10">
                                         <div className="flex justify-between items-start mb-6">
-                                            <div className="w-12 h-12 rounded-2xl bg-zinc-800 flex items-center justify-center group-hover:bg-violet-500 group-hover:text-white text-zinc-500 transition-all duration-300 shadow-inner">
+                                            <div className={`w-12 h-12 rounded-2xl flex items-center justify-center text-zinc-500 transition-all duration-300 shadow-inner ${v.image_url ? 'bg-zinc-950/50 backdrop-blur-md text-white border border-white/10' : 'bg-zinc-800 group-hover:bg-violet-500 group-hover:text-white'}`}>
                                                 <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                                                 </svg>
                                             </div>
-                                            <span className="px-3 py-1 rounded-full text-[10px] font-bold bg-emerald-500/10 text-emerald-500 border border-emerald-500/20 tracking-wide uppercase">
+                                            <span className="px-3 py-1 rounded-full text-[10px] font-bold bg-emerald-500/10 text-emerald-500 border border-emerald-500/20 tracking-wide uppercase backdrop-blur-md">
                                                 Active
                                             </span>
                                         </div>
 
-                                        <h3 className="text-2xl font-bold text-white mb-1 group-hover:text-violet-200 transition-colors">{v.name}</h3>
-                                        <p className="text-zinc-400 font-medium">{v.year} {v.make} {v.model}</p>
+                                        <h3 className="text-2xl font-bold text-white mb-1 group-hover:text-violet-200 transition-colors drop-shadow-md">{v.name}</h3>
+                                        <p className="text-zinc-300 font-medium drop-shadow-md">{v.year} {v.make} {v.model}</p>
 
-                                        <div className="mt-8 pt-6 border-t border-white/5 grid grid-cols-2 gap-4">
+                                        <div className="mt-8 pt-6 border-t border-white/10 grid grid-cols-2 gap-4">
                                             <div>
-                                                <p className="text-zinc-500 text-[10px] uppercase font-bold tracking-wider mb-1">VIN</p>
-                                                <p className="text-zinc-300 font-mono text-xs truncate opacity-70 group-hover:opacity-100 transition-opacity">{v.vin || '—'}</p>
+                                                <p className="text-zinc-400 text-[10px] uppercase font-bold tracking-wider mb-1">VIN</p>
+                                                <p className="text-zinc-200 font-mono text-xs truncate opacity-70 group-hover:opacity-100 transition-opacity">{v.vin || '—'}</p>
                                             </div>
                                             <div>
-                                                <p className="text-zinc-500 text-[10px] uppercase font-bold tracking-wider mb-1">Plate</p>
-                                                <p className="text-zinc-200 font-mono text-xs bg-zinc-800/50 px-2 py-1 rounded inline-block">{v.license_plate || '—'}</p>
+                                                <p className="text-zinc-400 text-[10px] uppercase font-bold tracking-wider mb-1">Plate</p>
+                                                <p className="text-zinc-100 font-mono text-xs bg-zinc-800/50 px-2 py-1 rounded inline-block backdrop-blur-md border border-white/5">{v.license_plate || '—'}</p>
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="h-1 w-full bg-gradient-to-r from-violet-500 via-purple-500 to-indigo-500 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                                    <div className="h-1 w-full bg-gradient-to-r from-violet-500 via-purple-500 to-indigo-500 opacity-0 group-hover:opacity-100 transition-opacity relative z-20"></div>
                                 </div>
                             </Link>
                         ))}
