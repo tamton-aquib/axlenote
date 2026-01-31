@@ -96,6 +96,26 @@ func (h *Handler) ListFuelLogs(c *fiber.Ctx) error {
 	response := make([]FuelLogResponse, len(logs))
 	for i, l := range logs {
 		response[i] = mapFuelLogToResponse(l)
+		
+		// Calculate mileage (km/L) for full tank fills
+		// Mileage = (current odometer - previous odometer) / liters filled
+		// Find the previous log (the one with the closest odometer reading that is less than current)
+		if l.FullTank.Bool {
+			var prevOdometer int32 = 0
+			for _, otherLog := range logs {
+				if otherLog.Odometer < l.Odometer && otherLog.Odometer > prevOdometer {
+					prevOdometer = otherLog.Odometer
+				}
+			}
+			
+			if prevOdometer > 0 {
+				distance := float64(l.Odometer - prevOdometer)
+				liters, _ := strconv.ParseFloat(l.Liters, 64)
+				if distance > 0 && liters > 0 {
+					response[i].Mileage = distance / liters
+				}
+			}
+		}
 	}
 
 	return c.JSON(fiber.Map{"data": response})
