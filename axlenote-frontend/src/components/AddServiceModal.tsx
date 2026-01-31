@@ -106,13 +106,13 @@ export default function AddServiceModal({ isOpen, onClose, onSuccess, vehicleId,
                 <div className="grid grid-cols-2 gap-4">
                     <div>
                         <label className="block text-sm font-medium text-neutral-500 dark:text-zinc-400 mb-1">Cost</label>
-                        <div className="relative">
-                            <span className="absolute left-4 top-2 text-neutral-500 dark:text-zinc-500">₹</span>
+                        <div className="flex items-center rounded-xl bg-neutral-50 dark:bg-zinc-950 border border-neutral-200 dark:border-white/5 px-4 py-2 focus-within:ring-2 focus-within:ring-violet-500/50">
+                            <span className="text-neutral-500 dark:text-zinc-500 mr-2">₹</span>
                             <input
                                 type="number"
                                 step="0.01"
                                 required
-                                className="w-full pl-8 rounded-xl bg-neutral-50 dark:bg-zinc-950 border border-neutral-200 dark:border-white/5 px-4 py-2 text-neutral-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-violet-500/50"
+                                className="w-full bg-transparent text-neutral-900 dark:text-white focus:outline-none"
                                 value={formData.cost}
                                 onChange={e => setFormData({ ...formData, cost: parseFloat(e.target.value) })}
                             />
@@ -121,7 +121,7 @@ export default function AddServiceModal({ isOpen, onClose, onSuccess, vehicleId,
                     <div>
                         <label className="block text-sm font-medium text-neutral-500 dark:text-zinc-400 mb-1">Type</label>
                         <select
-                            className="w-full rounded-xl bg-neutral-50 dark:bg-zinc-950 border border-neutral-200 dark:border-white/5 px-4 py-2 text-neutral-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-violet-500/50 appearance-none"
+                            className="w-full rounded-xl bg-neutral-50 dark:bg-zinc-950 border border-neutral-200 dark:border-white/5 px-4 py-2 text-neutral-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-violet-500/50 appearance-none cursor-pointer"
                             value={formData.service_type}
                             onChange={e => setFormData({ ...formData, service_type: e.target.value })}
                         >
@@ -174,7 +174,7 @@ export default function AddServiceModal({ isOpen, onClose, onSuccess, vehicleId,
                 <button
                     type="submit"
                     disabled={loading}
-                    className="w-full rounded-xl bg-violet-600 px-4 py-3 text-white hover:bg-violet-500 font-bold transition-all disabled:opacity-50 shadow-lg shadow-violet-500/20"
+                    className="w-full rounded-xl bg-violet-600 px-4 py-3 text-white hover:bg-violet-500 font-bold transition-all disabled:opacity-50 shadow-lg shadow-violet-500/20 cursor-pointer"
                 >
                     {loading ? 'Saving...' : (initialData ? 'Update Service' : 'Log Service')}
                 </button>

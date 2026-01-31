@@ -201,7 +201,7 @@ export default function VehicleDetails() {
               <h1 className="text-3xl font-extrabold text-neutral-900 dark:text-white tracking-tight">{vehicle.name}</h1>
               <button
                 onClick={() => setIsEditVehicleModalOpen(true)}
-                className="p-1.5 rounded-full hover:bg-neutral-100 dark:hover:bg-zinc-800 text-neutral-400 dark:text-neutral-500 hover:text-neutral-900 dark:hover:text-white transition-colors"
+                className="p-1.5 rounded-full hover:bg-neutral-100 dark:hover:bg-zinc-800 text-neutral-400 dark:text-neutral-500 hover:text-neutral-900 dark:hover:text-white transition-colors cursor-pointer"
                 title="Edit Vehicle Details"
               >
                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -316,13 +316,13 @@ export default function VehicleDetails() {
                         <div className="flex gap-1">
                           <button
                             onClick={() => { setEditingService(s); setIsServiceModalOpen(true); }}
-                            className="p-1 hover:bg-neutral-100 dark:hover:bg-white/10 rounded text-neutral-400 dark:text-neutral-500 hover:text-neutral-900 dark:hover:text-white transition-colors" title="Edit"
+                            className="p-1 hover:bg-neutral-100 dark:hover:bg-white/10 rounded text-neutral-400 dark:text-neutral-500 hover:text-neutral-900 dark:hover:text-white transition-colors cursor-pointer" title="Edit"
                           >
                             <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" /></svg>
                           </button>
                           <button
                             onClick={() => handleDeleteService(s.id)}
-                            className="p-1 hover:bg-red-500/10 rounded text-neutral-400 dark:text-neutral-500 hover:text-red-600 dark:hover:text-red-500 transition-colors" title="Delete"
+                            className="p-1 hover:bg-red-500/10 rounded text-neutral-400 dark:text-neutral-500 hover:text-red-600 dark:hover:text-red-500 transition-colors cursor-pointer" title="Delete"
                           >
                             <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
                           </button>
@@ -379,13 +379,13 @@ export default function VehicleDetails() {
                         <div className="flex justify-end gap-2">
                           <button
                             onClick={() => { setEditingFuel(f); setIsFuelModalOpen(true); }}
-                            className="text-neutral-400 dark:text-neutral-500 hover:text-neutral-900 dark:hover:text-white transition-colors" title="Edit"
+                            className="text-neutral-400 dark:text-neutral-500 hover:text-neutral-900 dark:hover:text-white transition-colors cursor-pointer" title="Edit"
                           >
                             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" /></svg>
                           </button>
                           <button
                             onClick={() => handleDeleteFuel(f.id)}
-                            className="text-neutral-400 dark:text-neutral-500 hover:text-red-500 transition-colors" title="Delete"
+                            className="text-neutral-400 dark:text-neutral-500 hover:text-red-500 transition-colors cursor-pointer" title="Delete"
                           >
                             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
                           </button>
@@ -451,7 +451,7 @@ export default function VehicleDetails() {
                           fetchData()
                         }
                       }}
-                      className="w-full mt-auto bg-black/5 dark:bg-black/20 border border-neutral-200 dark:border-white/5 hover:bg-emerald-500/10 hover:text-emerald-600 dark:hover:text-emerald-400 hover:border-emerald-500/20 text-neutral-500 dark:text-neutral-400 py-2 rounded-lg text-sm transition-all"
+                      className="w-full mt-auto bg-black/5 dark:bg-black/20 border border-neutral-200 dark:border-white/5 hover:bg-emerald-500/10 hover:text-emerald-600 dark:hover:text-emerald-400 hover:border-emerald-500/20 text-neutral-500 dark:text-neutral-400 py-2 rounded-lg text-sm transition-all cursor-pointer"
                     >
                       Mark Done
                     </button>
@@ -468,7 +468,7 @@ export default function VehicleDetails() {
             <div className="text-center py-12 text-neutral-500 border-2 border-dashed border-neutral-800 rounded-xl">
               <p className="mb-4">No documents uploaded.</p>
               <button
-                className="text-emerald-500 hover:text-emerald-400 font-bold underline underline-offset-4"
+                className="text-emerald-500 hover:text-emerald-400 font-bold underline underline-offset-4 cursor-pointer"
                 onClick={() => setIsDocumentModalOpen(true)}
               >
                 + Add Document
@@ -479,7 +479,7 @@ export default function VehicleDetails() {
               <div className="flex justify-end mb-4">
                 <button
                   onClick={() => setIsDocumentModalOpen(true)}
-                  className="flex items-center gap-2 bg-white dark:bg-neutral-900 hover:bg-neutral-50 dark:hover:bg-neutral-800 text-neutral-900 dark:text-white px-3 py-1.5 rounded-lg text-sm font-medium border border-neutral-200 dark:border-white/5 transition-colors"
+                  className="flex items-center gap-2 bg-white dark:bg-neutral-900 hover:bg-neutral-50 dark:hover:bg-neutral-800 text-neutral-900 dark:text-white px-3 py-1.5 rounded-lg text-sm font-medium border border-neutral-200 dark:border-white/5 transition-colors cursor-pointer"
                 >
                   <span>+</span> Add Document
                 </button>
